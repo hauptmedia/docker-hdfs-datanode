@@ -10,16 +10,12 @@ ADD		docker-entrypoint.sh /usr/local/sbin/docker-entrypoint.sh
 VOLUME		["${HDFS_DATENODE_ROOT_DIR}"]
 
 
-# TCP	1004	dfs.datanode.address
-# TCP	1006	dfs.datanode.http.address
-# TCP	50010	dfs.datanode.address (DataNode HTTP server port)
-# 50075 (TCP): dfs.datanode.http.address
-# 50020 (TCP): dfs.datanode.ipc.address
+# TCP	50010	dfs.datanode.address		port for data transfer
+# TCP	50020	dfs.datanode.ipc.address	ipc server
+# TCP	50075	dfs.datanode.http.address	http server
+# TCP	50475	dfs.datanode.https.address	https server
 
-
-#EXPOSE 8020 50070 50470
-
-EXPOSE 8081 7077
+EXPOSE 50010 50020 50075 50475
 
 ENTRYPOINT ["/usr/local/sbin/docker-entrypoint.sh"]
 
